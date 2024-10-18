@@ -1,0 +1,27 @@
+# make sure to do exclusions first, then inclusions (inclusions won't override exclusions)
+
+# basically just exclude anything that is environment specific, like plugins, workspace (which changes everytime you open a note), etc
+!Notes/.obsidian/app.json
+
+# sync this only once to download, then stop syncing or it changes everytime you do a zoom in...
+!Notes/.obsidian/appearance.json
+!Notes/.obsidian/workspace.json
+
+# !Notes/.obsidian/community-plugins.json
+!Notes/.obsidian/core-plugins.json
+
+# can sync once if you want, but then need to exclude or else will just override each other all the time
+!Notes/.obsidian/plugins/recent-files-obsidian/data.json
+!Notes/.obsidian/plugins/recent-files-obsidian/*.json
+!recent-files-obsidian/*.json
+!Notes/.obsidian/plugins/various-complements/data.json
+
+
+# should be unnecessary since we're grabbing everything else, but whatever
+obsidian.css
+Notes/.obsidian/graph.json
+Notes/.obsidian/snippets
+
+# everything else
+*
+

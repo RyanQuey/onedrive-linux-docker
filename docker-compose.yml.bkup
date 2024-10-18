@@ -1,0 +1,25 @@
+version: "3"
+services:
+    onedrive:
+        image: driveone/onedrive:edge
+        restart: unless-stopped
+        environment:
+              # standard output of `id -u`
+            - ONEDRIVE_UID=1000
+              # standard output of `id -g`
+            - ONEDRIVE_GID=1000
+            - ONEDRIVE_DATA_DIR=${ONEDRIVE_DATA_DIR}
+        env_file: 
+            - .env
+        volumes: 
+            - onedrive_conf:/onedrive/conf
+              # should pull from .env file...or if not the "environment" mapping above (!)
+            - ${ONEDRIVE_DATA_DIR}:/onedrive/data
+
+volumes:
+    onedrive_conf: 
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: $HOME/.config/onedrive

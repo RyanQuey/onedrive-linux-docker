@@ -1,0 +1,82 @@
+
+There's a better way to do this...but I'm not sure what it is. 
+
+
+# Setup
+0) Make sure existing pre-reqs are correct
+
+See
+[this](https://github.com/abraunegg/onedrive/issues/2562#issuecomment-1859229723)
+> This 'config' problem stems from using 'OneDriveGUI' that incorrectly writes
+> out empty configuration items. If you are using this, and using 'alpha-3' -
+> you need to update your GUI to this:
+> https://github.com/bpozdena/OneDriveGUI/releases/tag/v1.1.0alpha0
+
+
+So, need to remove `drive_id` from configs
+
+1) Start container in `-it` (interactive tty mode)
+
+So, first just start the container, and then let it wait for you:
+
+
+```
+docker-compose up
+```
+
+2) Then as it's waiting, copy in the files
+```
+# docker cp /home/ryan/.config/onedrive/ "onedrive-linux-docker_onedrive_1:/onedrive/conf"
+docker cp /home/ryan/projects/onedrive-linux-docker/configs/config "onedrive-linux-docker_onedrive_1:/onedrive/conf/"
+docker cp /home/ryan/projects/onedrive-linux-docker/configs/sync_list "onedrive-linux-docker_onedrive_1:/onedrive/conf/"
+# optional, but saves time.
+docker cp /home/ryan/.config/onedrive/refresh_token "onedrive-linux-docker_onedrive_1:/onedrive/conf/
+```
+
+3) Close the container
+
+```
+ctrl-c
+```
+
+4) Then, restart container, which should now have all the right config files
+```
+docker start onedrive-linux-docker_onedrive_1
+```
+
+
+# Other operations
+
+- Taking cue often from:
+https://github.com/abraunegg/onedrive/blob/master/docs/docker.md#environment-variables-usage-examples
+  - Gives instructions regarding running one-off containers from the image,
+    which make use of existing volume. 
+
+## How to: Run a re-sync
+- THere's probably a wya to do this with existing containers. But this also
+  works fine:
+
+
+  ```
+
+  ```
+
+
+
+# Appendix 1 - Debugging
+## Check what's in that config file on a downed container
+If not down, and restarting, you might need to manually stop it first so it's
+startable
+
+
+```
+docker stop onedrive-linux-docker_onedrive_1
+```
+
+Then, 
+
+```
+docker stop onedrive-linux-docker_onedrive_1 && \
+docker start onedrive-linux-docker_onedrive_1 && docker exec -it
+onedrive-linux-docker_onedrive_1 cat /onedrive/conf/config
+```

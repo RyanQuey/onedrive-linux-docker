@@ -1,0 +1,3 @@
+sync_dir = "/onedrive/data"
+skip_file = "~*|.~*|*.tmp|test-file|appearance.json|workspace.json|Notes/.obsidian/plugins/recent-files-obsidian/data.json"
+skip_dotfiles = "false"
