@@ -1,1 +1,7 @@
 .env
+.config.hash
+.sync_list.hash
+items.sqlite3
+items.sqlite3-shm
+items.sqlite3-wal
+refresh_token

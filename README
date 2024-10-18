@@ -58,7 +58,7 @@ https://github.com/abraunegg/onedrive/blob/master/docs/docker.md#environment-var
 
 
   ```
-
+docker container run -e ONEDRIVE_RESYNC=1 -e ONEDRIVE_VERBOSE=1 -v onedrive-linux-docker_onedrive_conf:/onedrive/conf -v "/home/ryan/OneDrive:/onedrive/data" driveone/onedrive:edge
   ```
 
 
