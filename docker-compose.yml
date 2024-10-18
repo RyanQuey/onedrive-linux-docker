@@ -3,12 +3,21 @@ services:
     onedrive:
         image: driveone/onedrive:edge
         restart: unless-stopped
+        # to emulate -it. Especially important when need to reauth
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
         environment:
               # standard output of `id -u`
             - ONEDRIVE_UID=1000
               # standard output of `id -g`
             - ONEDRIVE_GID=1000
+
+              # exposing env vars on 
             - ONEDRIVE_DATA_DIR=${ONEDRIVE_DATA_DIR}
+            - ONEDRIVE_VERBOSE=${ONEDRIVE_VERBOSE}
+            - ONEDRIVE_RESYNC=${ONEDRIVE_RESYNC}
+            - ONEDRIVE_REAUTH=${ONEDRIVE_REAUTH}
+            - ONEDRIVE_LOGOUT=${ONEDRIVE_LOGOUT}
         env_file: 
             - .env
         volumes: 

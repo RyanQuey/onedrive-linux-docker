@@ -14,6 +14,12 @@ white=$(tput setaf 7)
 normal=$(tput sgr0)
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+export ONEDRIVE_RESYNC=0
+export ONEDRIVE_REAUTH=0
+export ONEDRIVE_VERBOSE=0
+export ONEDRIVE_LOGOUT=0
+
 PROJECT_DIR=$SCRIPT_DIR/..
 
 cd $PROJECT_DIR && \

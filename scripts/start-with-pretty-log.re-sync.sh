@@ -16,8 +16,13 @@ normal=$(tput sgr0)
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PROJECT_DIR=$SCRIPT_DIR/..
 
+# clear out these, if set already before
+export ONEDRIVE_REAUTH=0
+export ONEDRIVE_LOGOUT=0
+
 export ONEDRIVE_RESYNC=1 
-export ONEDRIVE_VERBOSE=1
+export ONEDRIVE_VERBOSE=0
+#export ONEDRIVE_VERBOSE=1
 
 cd $PROJECT_DIR && \
 docker-compose up | \
