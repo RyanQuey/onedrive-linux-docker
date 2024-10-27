@@ -155,3 +155,18 @@ wrong!!
   it might not mean anything. This also shows when there already is that folder
   directory, at least from my experience, and it still worked fine
 
+## A database statement execution error occurred: NOT NULL constraint failed:
+item.type
+```
+nedrive_1  | A database statement execution error occurred: NOT NULL constraint failed: item.type      
+nedrive_1  |                                                                                           
+nedrive_1  | Please restart the application with --resync to potentially fix any local database issues.
+nedrive_1  |                                                                                           
+nedrive_1  | A database statement execution error occurred: FOREIGN KEY constraint failed               nedrive_1  |                                                                                           
+nedrive_1  | Please restart the application with --resync to potentially fix any local database issues.
+```
+
+
+- This when running the sync
+- Mostly it happens when a file with strange characteristics appears, I think, and OneDrive doesn't know what to do with it. 
+- I'm not sure, but it doesn't error out, so I'm assuming OneDriveLinux just skips it. 

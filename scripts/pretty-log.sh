@@ -2,6 +2,7 @@
 
 # https://github.com/zzzdeb/dotfiles/blob/master/scripts/tools/onedrive_log
 
+# these commands change the color of subsequent output to that color
 black=$(tput setaf 0)
 red=$(tput setaf 1)
 green=$(tput setaf 2)
@@ -12,7 +13,12 @@ cyan=$(tput setaf 6)
 white=$(tput setaf 7)
 
 normal=$(tput sgr0)
-docker logs onedrive-linux-docker_onedrive_1 -f  |
+
+TAIL=${1:-500}
+
+#docker logs onedrive-linux-docker_onedrive_1 -f --tail $TAIL |
+# Docker logs doesn't include timestamp, so doing this instead
+docker exec -it onedrive-linux-docker_onedrive_1 tail -F /home/onedrive/onedrive.log -n $TAIL |
    ag -v 'Remaining free space' |                   # removing unwanted lines from log
   sed -u "s/Uploading/$(printf "${blue}Uploading${normal}")/;
           s/Successfully created/$(printf "${blue}Successfully created${normal}")/;
@@ -27,4 +33,4 @@ docker logs onedrive-linux-docker_onedrive_1 -f  |
           # s/error/$(printf "${red}❎ERROR${normal}")/gI;
           # s/done./$(printf "${green}✔${normal}")/
 
-# tip: bind some key to $TERMINAL -e onedrive_log. really convinient
+# tip: bind some key to $TERMINAL -e onedrive_log. really convenient

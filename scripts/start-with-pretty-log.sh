@@ -22,20 +22,7 @@ export ONEDRIVE_LOGOUT=0
 
 PROJECT_DIR=$SCRIPT_DIR/..
 
+# note that an alternative to this, is just to start the container in daemon mode (-d), and then get logs separately (`docker logs -f`)
 cd $PROJECT_DIR && \
-docker-compose up | \
-   ag -v 'Remaining free space' |                   # removing unwanted lines from log
-  sed -u "s/Uploading/$(printf "${blue}Uploading${normal}")/;
-          s/Successfully created/$(printf "${blue}Successfully created${normal}")/;
-          s/Downloading/$(printf "${magenta}Downloading${normal}")/;
-          s/Moving/$(printf "${magenta}Moving${normal}")/;
-          s/Deleting/$(printf "${yellow}Deleting${normal}")/;
-          s/deleted/$(printf "${yellow}deleted${normal}")/gI;
-          " |                                         # changing colors of words
-   ccze -A -c default=white  # |                        # nice program to colorize log
-          #>> /tmp/tmp1.txt
-  # ag --passthru "↗ |Stopping|Stopped|Uploading|Downloading|Error|Deleting"
-          # s/error/$(printf "${red}❎ERROR${normal}")/gI;
-          # s/done./$(printf "${green}✔${normal}")/
-
-# tip: bind some key to $TERMINAL -e onedrive_log. really convinient
+docker-compose up -d && \ 
+$SCRIPT_DIR/pretty-log.sh

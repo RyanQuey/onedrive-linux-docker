@@ -1,6 +1,8 @@
 sync_dir = "/onedrive/data"
 skip_file = "~*|.~*|*.tmp|test-file|appearance.json|workspace.json|Notes/.obsidian/plugins/recent-files-obsidian/data.json"
 log_dir = "/home/onedrive"
+threads = "12"
+notify_file_actions = "true"
 
 monitor_interval = "300"
 skip_dir = ""
@@ -38,4 +40,3 @@ webhook_listening_port = "8888"
 webhook_expiration_interval = "86400"
 webhook_renewal_interval = "43200"
 force_http_2 = "false"
-
